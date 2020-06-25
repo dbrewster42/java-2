@@ -1,4 +1,13 @@
-package burger_shop;
+// package burger_shop;
 
-public class Meat {
+class Meat {
+    private String name;
+
+    public Meat(String name) {
+        this.name = name;
+    }
+
+    public String getMeat() {
+        return this.name;
+    }
 }

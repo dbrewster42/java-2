@@ -108,7 +108,6 @@ public class Main {
         while (active) {
             int action = scanner.nextInt();
             scanner.nextLine();
-
             switch (action) {
                 case 0:
                     active = false;
@@ -168,21 +167,115 @@ public class Main {
 
     }
 
-    public void makeMeal(Burger burger) {
-        System.out.println("Would you like to make it a meal?");
+    public static Drink getDrink() {
+        Drink drink = null;
+        // System.out.println("0 - None");
+        System.out.println("Choose a drink: ");
+        System.out.println("1 - None/Water");
+        System.out.println("2 - Coke");
+        System.out.println("3 - Dr Pepper");
+        System.out.println("4 - Tea");
+        System.out.println("5 - Sprite");
+        System.out.println("6 - Diet Coke");
+        int action = scanner.nextInt();
+        scanner.nextLine();
+        switch (action) {
+            // case 0:
+            // System.out.println("You have chosen no drink");
+            // drink = null;
+            // break;
+            case 1:
+                System.out.println("You have chosen water");
+                drink = Drink.WATER;
+                break;
+            case 2:
+                System.out.println("You have chosen Coke");
+                drink = Drink.COKE;
+                break;
+            case 3:
+                System.out.println("You have chosen Dr Pepper");
+                drink = Drink.DRP;
+                break;
+            case 4:
+                System.out.println("You have chosen Tea");
+                drink = Drink.TEA;
+                break;
+            case 5:
+                System.out.println("You have chosen Sprite");
+                drink = Drink.SPRITE;
+                break;
+            case 6:
+                System.out.println("You have chosen Diet Coke");
+                drink = Drink.DIET;
+                break;
+
+        }
+        return drink;
+    }
+
+    public static Side getSide() {
+        Side side = null;
+        System.out.println("Choose a side: ");
+        System.out.println("0 - None");
+        System.out.println("1 - Fries");
+        System.out.println("2 - Fruit");
+        System.out.println("3 - Onion Rings");
+        System.out.println("4 - Chocolate Chip Cookie");
+        System.out.println("5 - Brownie");
+        // boolean active = true;
+        // while (active) {
+        int action = scanner.nextInt();
+        scanner.nextLine();
+        switch (action) {
+            case 0:
+                System.out.println("You have chosen No Side");
+                side = null;
+                break;
+            case 1:
+                System.out.println("You have chosen Fries");
+                side = Side.FRIES;
+                break;
+            case 2:
+                System.out.println("You have chosen Fruit");
+                side = Side.FRUIT;
+                break;
+            case 3:
+                System.out.println("You have chosen Onion Rings");
+                side = Side.ORINGS;
+                break;
+            case 4:
+                System.out.println("You have chosen Chocolate Chip Cookie");
+                side = Side.COOKIE;
+                break;
+            case 5:
+                System.out.println("You have chosen Brownie");
+                side = Side.BROWNIE;
+                break;
+        }
+        return side;
+    }
+
+    public static void makeMeal(Burger burger, Drink drink) {
+        Side side = null;
+        System.out.println("Would you like to add a side?");
         System.out.println("1 - Yes");
         System.out.println("2 - No");
         int action = scanner.nextInt();
         scanner.nextLine();
-        switch (action) {
-            case 1:
-                System.out.println("Would you like fries or fruit as your side?");
-                System.out.println("1 - Fries");
-                System.out.println("2 - Fruit");
-                int second = scanner.nextInt();
-                scanner.nextLine();
-                    Meal meal = new Meal(burger, fries, drink)
+        if (action == 1) {
+            side = getSide();
+            // Meal meal = new Meal(burger, side, drink);
+        } else if (action == 2) {
+            // side = null;
+            System.out.println("You have chosen No Side");
+        } else {
+            System.out.println("Invalid reply");
+            makeMeal(burger, drink);
         }
+        Meal meal = new Meal(burger, side, drink);
+        System.out.println("You have purchased a meal for $" + meal.getMealPrice());
+        System.out.println("You may continue shopping or checkout now");
+
     }
 
     public static void main(String[] args) {
@@ -211,7 +304,7 @@ public class Main {
                     System.out.println("The Deluxe comes with lettuce, grilled onions, cheese, and bacon");
                     // dBurger.setDeluxeToppings(Burger.lettuce, Burger.gOnion, Burger.cheese, Burger.bacon);                    
                     // dBurger.setDeluxeToppings(toppings.get(0), toppings.get(7), toppings.get(8), toppings.get(9));
-                    dBurger.getDeluxePrice();
+                    // dBurger.getDeluxePrice();
                     System.out.println("You have chosen the Deluxe Burger");
                     dBurger.getPrice();
                     break;
@@ -229,7 +322,8 @@ public class Main {
                     System.out.println(burger);
                     addToppings(burger);
                     burger.totalBurgerPrice();
-                    makeMeal();
+                    Drink drink = getDrink();
+                    makeMeal(burger, drink);
                     break;
                 default:
                     active = false;

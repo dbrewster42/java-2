@@ -17,11 +17,7 @@ public class Burger {
 
     // public Burger(boolean customize) {
     public Burger() {
-        // if (first)
-        //     makeToppings();
-        // if (customize) {
-        //     addTopping();
-        // }
+
     }
 
     // customTopping(){
@@ -30,78 +26,86 @@ public class Burger {
 
     public void addTopping(Topping topping) {
         int priceChange = topping.getPrice();
-        newPrice += priceChange;
-        if (toppings.size() < 2) {
-            newPrice -= 50;
-        }
         toppings.add(topping);
+        if (toppings.size() < 3) {
+            priceChange -= 50;
+        }
+        newPrice += priceChange;
     }
 
     public static void makeToppings() {
-        // first = false;
-        Topping lettuce = new Topping("lettuce");
-        Topping tomatoes = new Topping("tomatoes");
-        Topping alfafa = new Topping("alfafa");
-        Topping onions = new Topping("onions");
-        Topping pickles = new Topping("pickles");
-        Topping jalepenos = new Topping("grilled jalepenos", 100);
-        Topping guacamole = new Topping("guacamole", 200);
-        Topping cheese = new Topping("cheese", 100);
-        Topping bacon = new Topping("bacon", 150);
-        Topping gOnions = new Topping("grilled onions", 100);
-        allToppings.add(lettuce);
-        allToppings.add(tomatoes);
-        allToppings.add(alfafa);
-        allToppings.add(onions);
-        allToppings.add(pickles);
-        allToppings.add(jalepenos);
-        allToppings.add(guacamole);
-        allToppings.add(cheese);
-        allToppings.add(bacon);
-        allToppings.add(gOnions);
+        // Topping lettuce = new Topping("lettuce");
+        // Topping tomatoes = new Topping("tomatoes");
+        // Topping alfafa = new Topping("alfafa");
+        // Topping onions = new Topping("onions");
+        // Topping pickles = new Topping("pickles");
+        // Topping jalepenos = new Topping("grilled jalepenos", 100);
+        // Topping guacamole = new Topping("guacamole", 200);
+        // Topping cheese = new Topping("cheese", 100);
+        // Topping bacon = new Topping("bacon", 150);
+        // Topping gOnions = new Topping("grilled onions", 100);
+        allToppings.add(Topping.Lettuce);
+        allToppings.add(Topping.Tomatoes);
+        allToppings.add(Topping.Alfafa);
+        allToppings.add(Topping.Onions);
+        allToppings.add(Topping.Pickles);
+        allToppings.add(Topping.Jalepenos);
+        allToppings.add(Topping.Guacamole);
+        allToppings.add(Topping.Cheese);
+        allToppings.add(Topping.Bacon);
+        allToppings.add(Topping.GOnions);
     }
 
-    public static ArrayList getAllToppings() {
-        // (Topping i : allToppings ){
-        //     System.out.println(i.getName());
-        // }
+    // public static ArrayList getAllToppings() {
+    //     // (Topping i : allToppings ){
+    //     //     System.out.println(i.getName());
+    //     // }
+    //     return allToppings;
+
+    // }
+    public static ArrayList<Topping> getAllToppings() {
         return allToppings;
-
     }
 
-    public Meat chooseMeat(String name) {
+    public void chooseMeat(Meat meatType) {
         // public void chooseMeat(String name) {
-        if (name.equals("Steak")) {
+        if (meatType.getMeat().equals("Steak")) {
             newPrice += 100;
         }
-        this.meat = new Meat(name);
+        this.meat = meatType;
         // String meatName = name;
         // customBurger.add(name);
-        return meat;
+        // return meat;
     }
 
     // public Meat getMeat(){
     //     return 
     // }
 
-    public Bread chooseBread(String name) {
-        this.bread = new Bread(name);
+    public void chooseBread(Bread roll) {
+        this.bread = roll;
         // breadName += name;
         // customBurger.add(name);
-        return bread;
+        // return bread;
     }
 
     public int totalBurgerPrice() {
+        String tops = "";
+        for (Topping i : toppings) {
+            tops = tops + i.getName() + " ";
+        }
         // String meatType = this.meat.getName();
         // Bread breadType = bread.name;
-        System.out.println("You have ordered a burger with " + meat.getMeat() + " for $" + (this.newPrice / 100) + "."
-                + (this.newPrice % 100));
-        // System.out.println("You have ordered a burger with " + meat.getMeat() + " on a " + bread.name + " bun for $"
-        // + (this.newPrice / 100) + "." + (this.newPrice % 100));
+        // System.out.println("You have ordered a burger with " + meat.getMeat() + " for $" + (this.newPrice / 100) + "."
+        //         + (this.newPrice % 100));
+        System.out.println("You have ordered a burger with " + this.meat.getMeat() + " on a " + this.bread.getBread()
+                + " bun with " + tops + "for $" + (this.newPrice / 100) + "." + (this.newPrice % 100));
         return this.newPrice;
     }
 
     public int plainBurgerPrice() {
+        // System.out.println(price);
+        // price += null;
         return price;
     }
 }

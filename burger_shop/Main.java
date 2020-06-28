@@ -37,18 +37,23 @@ public class Main {
         switch (action) {
             case 1:
                 System.out.println("You have chosen Beef");
+                Meat beef = new Meat("Beef");
+                burger.chooseMeat(beef);
                 break;
             case 2:
                 System.out.println("You have chosen Turkey");
-                burger.chooseMeat("Turkey");
+                Meat turkey = new Meat("Turkey");
+                burger.chooseMeat(turkey);
                 break;
             case 3:
                 System.out.println("You have chosen Chicken");
-                burger.chooseMeat("Chicken");
+                Meat chicken = new Meat("Chicken");
+                burger.chooseMeat(chicken);
                 break;
             case 4:
                 System.out.println("You have chosen Steak");
-                burger.chooseMeat("Steak");
+                Meat steak = new Meat("Steak");
+                burger.chooseMeat(steak);
                 // changePrice(100);
                 break;
         }
@@ -73,6 +78,7 @@ public class Main {
 
         // }
         Bread bread = new Bread(roll);
+        burger.chooseBread(bread);
         System.out.println("You have chosen a " + roll + " roll.");
     }
 
@@ -106,6 +112,7 @@ public class Main {
             switch (action) {
                 case 0:
                     active = false;
+                    break;
                 case 1:
                     burger.addTopping(toppings.get(0));
                     System.out.println("You have added lettuce");
@@ -161,6 +168,23 @@ public class Main {
 
     }
 
+    public void makeMeal(Burger burger) {
+        System.out.println("Would you like to make it a meal?");
+        System.out.println("1 - Yes");
+        System.out.println("2 - No");
+        int action = scanner.nextInt();
+        scanner.nextLine();
+        switch (action) {
+            case 1:
+                System.out.println("Would you like fries or fruit as your side?");
+                System.out.println("1 - Fries");
+                System.out.println("2 - Fruit");
+                int second = scanner.nextInt();
+                scanner.nextLine();
+                    Meal meal = new Meal(burger, fries, drink)
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Bob's Burgers. Please choose a burger: ");
         Burger.makeToppings();
@@ -186,8 +210,10 @@ public class Main {
                     breadChoice(dBurger);
                     System.out.println("The Deluxe comes with lettuce, grilled onions, cheese, and bacon");
                     // dBurger.setDeluxeToppings(Burger.lettuce, Burger.gOnion, Burger.cheese, Burger.bacon);                    
-                    dBurger.setDeluxeToppings(toppings.get(0), toppings.get(7), toppings.get(8), toppings.get(9));
+                    // dBurger.setDeluxeToppings(toppings.get(0), toppings.get(7), toppings.get(8), toppings.get(9));
                     dBurger.getDeluxePrice();
+                    System.out.println("You have chosen the Deluxe Burger");
+                    dBurger.getPrice();
                     break;
                 case 3:
                     System.out.println("You have chosen the Healthy Burger");
@@ -198,10 +224,12 @@ public class Main {
                     Burger burger = new Burger();
                     meatChoice(burger);
                     breadChoice(burger);
+                    burger.totalBurgerPrice();
                     System.out.println("I like burgers");
                     System.out.println(burger);
                     addToppings(burger);
                     burger.totalBurgerPrice();
+                    makeMeal();
                     break;
                 default:
                     active = false;

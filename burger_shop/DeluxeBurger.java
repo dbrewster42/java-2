@@ -5,9 +5,7 @@ public class DeluxeBurger extends Burger {
     private Meat meat;
     private ArrayList<Topping> toppings = new ArrayList<Topping>();
     private int price = 999;
-    // private int newPrice = 999;
 
-    // public DeluxeBurger(boolean custom) {
     public DeluxeBurger() {
         toppings.add(Topping.Lettuce);
         toppings.add(Topping.Tomatoes);
@@ -17,6 +15,27 @@ public class DeluxeBurger extends Burger {
         toppings.add(Topping.GOnions);
     }
 
+    public ArrayList<Topping> getDeluxeToppings() {
+        String tops = "";
+        for (Topping i : toppings) {
+            tops = tops + i.getName() + " ";
+        }
+        System.out.println("The Deluxe Burger comes with " + tops);
+        return toppings;
+    }
+
+    public void chooseMeat(Meat meatType) {
+        if (meatType.getMeat().equals("Steak")) {
+            price += 100;
+        }
+        this.meat = meatType;
+    }
+
+    public int getPrice() {
+        // System.out.println("You have ordered a burger for $" + (this.newPrice / 100) + "." + (this.newPrice % 100));
+        System.out.println("You have ordered a Deluxe Burger for $" + (price / 100) + "." + (price % 100));
+        return price;
+    }
     // public int getDeluxePrice() {
     //     // System.out.println("You have ordered a Deluxe Burger with " + meat.getMeat() + " for $" + (price / 100) + "."
     //     //         + (price % 100));
@@ -31,12 +50,6 @@ public class DeluxeBurger extends Burger {
     //             + "." + (this.newPrice % 100));
     // }
 
-    public int getPrice() {
-        // System.out.println("You have ordered a burger for $" + (this.newPrice / 100) + "." + (this.newPrice % 100));
-        System.out.println("You have ordered a Deluxe Burger for $" + (price / 100) + "." + (price % 100));
-        return price;
-    }
-
     // public void setDeluxeToppings(Topping top, Topping top2, Topping top3, Topping top4) {
     //     toppings.add(top);
     //     toppings.add(top2);
@@ -44,11 +57,11 @@ public class DeluxeBurger extends Burger {
     //     toppings.add(top4);
     // }
 
-    public void chooseMeat(Meat meatType) {
-        super.chooseMeat(meatType);
-        // meat = super.chooseMeat(name);
-        // return meat;
-    }
+    // public void chooseMeat(Meat meatType) {
+    //     super.chooseMeat(meatType);
+    //     // meat = super.chooseMeat(name);
+    //     // return meat;
+    // }
     // public 
 
 }

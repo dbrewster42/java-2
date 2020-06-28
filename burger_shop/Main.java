@@ -77,9 +77,16 @@ public class Main {
         //         String roll = "rye";
 
         // }
-        Bread bread = new Bread(roll);
-        burger.chooseBread(bread);
-        System.out.println("You have chosen a " + roll + " roll.");
+        if (roll.equals("White") || roll.equals("white") || roll.equals("Wheat") || roll.equals("wheat")
+                || roll.equals("Rye") || roll.equals("rye")) {
+            Bread bread = new Bread(roll);
+            burger.chooseBread(bread);
+            System.out.println("You have chosen a " + roll + " roll.");
+        } else {
+            System.out.println("Invalid Choice. Please Try Again");
+            breadChoice(burger);
+        }
+
     }
 
     public static void addToppings(Burger burger) {
@@ -255,7 +262,7 @@ public class Main {
         return side;
     }
 
-    public static void makeMeal(Burger burger, Drink drink) {
+    public static Meal makeMeal(Burger burger, Drink drink) {
         Side side = null;
         System.out.println("Would you like to add a side?");
         System.out.println("1 - Yes");
@@ -273,9 +280,31 @@ public class Main {
             makeMeal(burger, drink);
         }
         Meal meal = new Meal(burger, side, drink);
-        System.out.println("You have purchased a meal for $" + meal.getMealPrice());
-        System.out.println("You may continue shopping or checkout now");
+        meal.getMealPrice();
+        // System.out.println("You have purchased a meal for $" + meal.getMealPrice());
+        return meal;
+    }
 
+    public static boolean mealCheck(Meal meal) {
+        System.out.println("1 - Add Another Side");
+        System.out.println("2 - Add Another Burger");
+        System.out.println("Any other number - Checkout Now");
+        int action = scanner.nextInt();
+        scanner.nextLine();
+        if (action == 1) {
+            System.out.println("Add Another Side");
+            Side side = getSide();
+            if (meal.addSide(side))
+                mealCheck(meal);
+            // else
+            //     return true;
+        } else if (action == 2) {
+            System.out.println("Add Another Burger");
+            return true;
+        } else {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -285,17 +314,27 @@ public class Main {
         while (active) {
             // System.out.println("Choose your burger: ");
             ArrayList<Topping> toppings = Burger.getAllToppings();
+            int action = 0;
+            // System.out.println("0 - Print Options");
             System.out.println("1 - Create your Burger");
             System.out.println("2 - Deluxe Burger");
             System.out.println("3 - Healthy Burger");
-            System.out.println("Any other number - Exit");
-            int action = scanner.nextInt();
-            scanner.nextLine();
-            // System.out.println("Do you want to customize your toppins?");
-            // System.out.println("If so type true, else type false");
-            // boolean custom = scanner.nextBoolean();
-            // scanner.nextLine();
+            System.out.println("Any other key - Exit");
+            try {
+                action = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                action = 5;
+                //  action = 0;
+            }
             switch (action) {
+                // case 0:
+                //     System.out.println("0 - Print Options");
+                //     System.out.println("1 - Create your Burger");
+                //     System.out.println("2 - Deluxe Burger");
+                //     System.out.println("3 - Healthy Burger");
+                //     System.out.println("Any other number - Exit");
+                //     break;
                 case 2:
                     System.out.println("You have chosen the Deluxe Burger");
                     DeluxeBurger dBurger = new DeluxeBurger();
@@ -323,15 +362,15 @@ public class Main {
                     addToppings(burger);
                     burger.totalBurgerPrice();
                     Drink drink = getDrink();
-                    makeMeal(burger, drink);
+                    Meal meal = makeMeal(burger, drink);
+                    Order order = new Order(meal);
+                    active = mealCheck(meal);
                     break;
                 default:
+                    System.out.println("Goodbye");
                     active = false;
             }
-            // printSelection();
-            // System.out.println("You have chosen a burger with a " + burger.getMeat());
 
-            //Toppings
         }
 
     }

@@ -6,23 +6,16 @@ public class Burger {
     // private Bread roll = new Bread();
     // private Meat meat = new Meat();
     private Bread bread;
-    // public String breadName;
     private Meat meat;
     private static final int price = 699;
     private int newPrice = 699;
     private static ArrayList<Topping> allToppings = new ArrayList<Topping>();
     // private static Topping[] allToppings = new Topping[10];
     private ArrayList<Topping> toppings = new ArrayList<Topping>();
-    // private ArrayList<String> customBurger = new ArrayList<String>();    
 
-    // public Burger(boolean customize) {
     public Burger() {
 
     }
-
-    // customTopping(){
-    //     addTopping("lettuce");
-    // }
 
     public void addTopping(Topping topping) {
         int priceChange = topping.getPrice();
@@ -104,8 +97,6 @@ public class Burger {
     }
 
     public int plainBurgerPrice() {
-        // System.out.println(price);
-        // price += null;
         return price;
     }
 }

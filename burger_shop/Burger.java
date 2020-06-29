@@ -96,6 +96,10 @@ public class Burger {
         return this.newPrice;
     }
 
+    public int getPrice() {
+        return this.newPrice;
+    }
+
     public int plainBurgerPrice() {
         return price;
     }

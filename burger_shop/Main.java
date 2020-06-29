@@ -346,6 +346,11 @@ public class Main {
                     // dBurger.getDeluxePrice();
                     System.out.println("You have chosen the Deluxe Burger");
                     dBurger.getPrice();
+                    Drink dDrink = getDrink();
+                    Meal dMeal = makeMeal(dBurger, dDrink);
+                    Order dOrder = new Order(dMeal);
+                    active = mealCheck(dMeal);
+                    dOrder.getTotalPrice();
                     break;
                 case 3:
                     System.out.println("You have chosen the Healthy Burger");
@@ -365,6 +370,7 @@ public class Main {
                     Meal meal = makeMeal(burger, drink);
                     Order order = new Order(meal);
                     active = mealCheck(meal);
+                    order.getTotalPrice();
                     break;
                 default:
                     System.out.println("Goodbye");

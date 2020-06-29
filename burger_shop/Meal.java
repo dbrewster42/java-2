@@ -13,7 +13,7 @@ public class Meal {
         this.drink = drink;
         this.side = side;
         sides[0] = side;
-        price = burger.totalBurgerPrice();
+        price = burger.getPrice();
         // if (drink && (this.side == Side.FRIES || this.side == Side.FRUIT)) {
         if (drink != Drink.WATER && this.side == Side.FRIES) {
             price += 300;

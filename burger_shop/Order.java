@@ -3,12 +3,16 @@ import java.util.ArrayList;
 public class Order {
     private Meal meal;
     private ArrayList<Meal> meals = new ArrayList<Meal>();
-    int price;
+    private int price = 0;
 
-    public Order(Meal meal) {
-        this.meal = meal;
-        price = this.meal.getMealPrice();
+    public Order() {
+
     }
+
+    // public Order(Meal meal) {
+    //     this.meal = meal;
+    //     price += this.meal.getMealPrice();
+    // }
 
     public void addMeal(Meal meal) {
         Meal newMeal = meal;

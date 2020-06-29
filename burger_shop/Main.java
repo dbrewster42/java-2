@@ -67,7 +67,6 @@ public class Main {
         System.out.println("Rye");
         String roll = scanner.nextLine();
         // scanner.nextLine();
-
         // switch (action) {
         //     case 1:
         //         String roll = "white";
@@ -75,7 +74,6 @@ public class Main {
         //         String roll = "wheat";
         //     case 3:
         //         String roll = "rye";
-
         // }
         if (roll.equals("White") || roll.equals("white") || roll.equals("Wheat") || roll.equals("wheat")
                 || roll.equals("Rye") || roll.equals("rye")) {
@@ -91,11 +89,6 @@ public class Main {
 
     public static void addToppings(Burger burger) {
         System.out.println("Choose your toppings(first 2 regular toppings are free): ");
-        // System.out.println("0 - Quit");
-        // System.out.println("1 - Beef");
-        // System.out.println("2 - Turkey");
-        // System.out.println("3 - Chicken");
-        // System.out.println("4 - Steak");
         ArrayList<Topping> toppings = Burger.getAllToppings();
         System.out.println("0 - Finished");
         for (int i = 0; i < toppings.size(); i++) {
@@ -285,7 +278,7 @@ public class Main {
         return meal;
     }
 
-    public static boolean mealCheck(Meal meal) {
+    public static boolean mealCheck(Meal meal, Order order) {
         System.out.println("1 - Add Another Side");
         System.out.println("2 - Add Another Burger");
         System.out.println("Any other number - Checkout Now");
@@ -295,13 +288,15 @@ public class Main {
             System.out.println("Add Another Side");
             Side side = getSide();
             if (meal.addSide(side))
-                mealCheck(meal);
+                mealCheck(meal, order);
             // else
             //     return true;
         } else if (action == 2) {
+            order.addMeal(meal);
             System.out.println("Add Another Burger");
             return true;
         } else {
+            order.addMeal(meal);
             return false;
         }
         return true;
@@ -310,12 +305,14 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to Bob's Burgers. Please choose a burger: ");
         Burger.makeToppings();
+        Order order = new Order();
         boolean active = true;
         while (active) {
             // System.out.println("Choose your burger: ");
             ArrayList<Topping> toppings = Burger.getAllToppings();
             int action = 0;
             // System.out.println("0 - Print Options");
+
             System.out.println("1 - Create your Burger");
             System.out.println("2 - Deluxe Burger");
             System.out.println("3 - Healthy Burger");
@@ -348,13 +345,20 @@ public class Main {
                     dBurger.getPrice();
                     Drink dDrink = getDrink();
                     Meal dMeal = makeMeal(dBurger, dDrink);
-                    Order dOrder = new Order(dMeal);
-                    active = mealCheck(dMeal);
-                    dOrder.getTotalPrice();
+                    // Order dOrder = new Order(dMeal);
+                    active = mealCheck(dMeal, order);
+                    order.getTotalPrice();
                     break;
                 case 3:
                     System.out.println("You have chosen the Healthy Burger");
                     HealthBurger hBurger = new HealthBurger();
+                    System.out.println("The Healthy Burger is a Turkey Burger on a Wheat bun.");
+                    addToppings(hBurger);
+                    hBurger.getPrice();
+                    Drink hDrink = getDrink();
+                    Meal hMeal = makeMeal(hBurger, hDrink);
+                    active = mealCheck(hMeal, order);
+                    order.getTotalPrice();
                     break;
                 case 1:
                     System.out.println("You have chosen a Regular Burger");
@@ -368,8 +372,8 @@ public class Main {
                     burger.totalBurgerPrice();
                     Drink drink = getDrink();
                     Meal meal = makeMeal(burger, drink);
-                    Order order = new Order(meal);
-                    active = mealCheck(meal);
+                    // Order order = new Order(meal);
+                    active = mealCheck(meal, order);
                     order.getTotalPrice();
                     break;
                 default:

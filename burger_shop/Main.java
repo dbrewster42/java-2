@@ -315,7 +315,7 @@ public class Main {
 
             System.out.println("1 - Create your Burger");
             System.out.println("2 - Deluxe Burger");
-            System.out.println("3 - Healthy Burger");
+            System.out.println("3 - Healthy Burger (unfinished)");
             System.out.println("Any other key - Exit");
             try {
                 action = scanner.nextInt();

@@ -87,6 +87,90 @@ public class Main {
 
     }
 
+    public static void addHealthyToppings(Burger burger) {
+        System.out.println("Choose your toppings(first 2 regular toppings are free): ");
+        ArrayList<Topping> toppings = Burger.getAllToppings();
+        System.out.println("0 - Finished");
+        // ArrayList<Topping> healthyToppings = new ArrayList<Topping>;
+        for (int i = 0; i < toppings.size(); i++) {
+            Topping top = toppings.get(i);
+            if (i == 5) {
+                System.out.println("Gourmet Toppings:");
+            }
+            if (i < 5) {
+                System.out.println((i + 1) + " - " + top.getName());
+            } else {
+                if (top.getHealthy()) {
+                    System.out.println((i + 1) + " - " + top.getName() + " : +$" + (top.getPrice() / 100) + "."
+                            + (top.getPrice() % 100));
+                }
+
+            }
+
+        }
+        boolean active = true;
+        while (active) {
+            int action = scanner.nextInt();
+            scanner.nextLine();
+            switch (action) {
+                case 0:
+                    active = false;
+                    break;
+                case 1:
+                    burger.addTopping(toppings.get(0));
+                    System.out.println("You have added lettuce");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 2:
+                    burger.addTopping(toppings.get(1));
+                    System.out.println("You have added tomatoes");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 3:
+                    burger.addTopping(toppings.get(2));
+                    System.out.println("You have added alfafa");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 4:
+                    burger.addTopping(toppings.get(3));
+                    System.out.println("You have added onions");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 5:
+                    burger.addTopping(toppings.get(4));
+                    System.out.println("You have added pickles");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 6:
+                    burger.addTopping(toppings.get(5));
+                    System.out.println("You have added grilled jalepenos");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                case 7:
+                    burger.addTopping(toppings.get(6));
+                    System.out.println("You have added guacamole");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+                // case 8:
+                //     burger.addTopping(toppings.get(7));
+                //     System.out.println("You have added cheese");
+                //     System.out.println("Press 0 if finished or choose another topping");
+                //     break;
+                // case 9:
+                //     burger.addTopping(toppings.get(8));
+                //     System.out.println("You have added bacon");
+                //     System.out.println("Press 0 if finished or choose another topping");
+                //     break;
+                case 10:
+                    burger.addTopping(toppings.get(9));
+                    System.out.println("You have added grilled onions");
+                    System.out.println("Press 0 if finished or choose another topping");
+                    break;
+            }
+        }
+
+    }
+
     public static void addToppings(Burger burger) {
         System.out.println("Choose your toppings(first 2 regular toppings are free): ");
         ArrayList<Topping> toppings = Burger.getAllToppings();
@@ -171,7 +255,8 @@ public class Main {
         Drink drink = null;
         // System.out.println("0 - None");
         System.out.println("Choose a drink: ");
-        System.out.println("1 - None/Water");
+        System.out.println("0 - None");
+        System.out.println("1 - Water");
         System.out.println("2 - Coke");
         System.out.println("3 - Dr Pepper");
         System.out.println("4 - Tea");
@@ -180,10 +265,10 @@ public class Main {
         int action = scanner.nextInt();
         scanner.nextLine();
         switch (action) {
-            // case 0:
-            // System.out.println("You have chosen no drink");
-            // drink = null;
-            // break;
+            case 0:
+                System.out.println("You have chosen no drink");
+                // drink = null;
+                break;
             case 1:
                 System.out.println("You have chosen water");
                 drink = Drink.WATER;
@@ -256,22 +341,22 @@ public class Main {
     }
 
     public static Meal makeMeal(Burger burger, Drink drink) {
-        Side side = null;
-        System.out.println("Would you like to add a side?");
-        System.out.println("1 - Yes");
-        System.out.println("2 - No");
-        int action = scanner.nextInt();
-        scanner.nextLine();
-        if (action == 1) {
-            side = getSide();
-            // Meal meal = new Meal(burger, side, drink);
-        } else if (action == 2) {
-            // side = null;
-            System.out.println("You have chosen No Side");
-        } else {
-            System.out.println("Invalid reply");
-            makeMeal(burger, drink);
-        }
+        // Side side = null;
+        // System.out.println("Would you like to add a side?");
+        // System.out.println("1 - Yes");
+        // System.out.println("2 - No");
+        // int action = scanner.nextInt();
+        // scanner.nextLine();
+        // if (action == 1) {
+        Side side = getSide();
+        // Meal meal = new Meal(burger, side, drink);
+        // } else if (action == 2) {
+        //     // side = null;
+        //     System.out.println("You have chosen No Side");
+        // } else {
+        //     System.out.println("Invalid reply");
+        //     makeMeal(burger, drink);
+        // }
         Meal meal = new Meal(burger, side, drink);
         meal.getMealPrice();
         // System.out.println("You have purchased a meal for $" + meal.getMealPrice());
@@ -315,7 +400,7 @@ public class Main {
 
             System.out.println("1 - Create your Burger");
             System.out.println("2 - Deluxe Burger");
-            System.out.println("3 - Healthy Burger (unfinished)");
+            System.out.println("3 - Healthy Burger");
             System.out.println("Any other key - Exit");
             try {
                 action = scanner.nextInt();
@@ -353,7 +438,7 @@ public class Main {
                     System.out.println("You have chosen the Healthy Burger");
                     HealthBurger hBurger = new HealthBurger();
                     System.out.println("The Healthy Burger is a Turkey Burger on a Wheat bun.");
-                    addToppings(hBurger);
+                    addHealthyToppings(hBurger);
                     hBurger.getPrice();
                     Drink hDrink = getDrink();
                     Meal hMeal = makeMeal(hBurger, hDrink);

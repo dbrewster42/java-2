@@ -17,13 +17,31 @@ public class Burger {
 
     }
 
-    public void addTopping(Topping topping) {
+    public boolean addTopping(Topping topping) {
+        // for (Topping i : toppings){
+        //     if (i == topping){
+
+        //     }
+        // }
+        for (int i = 0; i < toppings.size(); i++) {
+            if (toppings.get(i) == topping) {
+                for (int j = i + 1; j < toppings.size(); j++) {
+                    if (toppings.get(i) == topping) {
+                        System.out.println(
+                                "Sorry but you already have reached the limit of 2 servings of " + topping.getName());
+                        return false;
+                    }
+
+                }
+            }
+        }
         int priceChange = topping.getPrice();
         toppings.add(topping);
         if (toppings.size() < 3) {
             priceChange -= 50;
         }
         newPrice += priceChange;
+        return true;
     }
 
     public static void makeToppings() {

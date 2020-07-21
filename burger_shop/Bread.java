@@ -1,5 +1,14 @@
-package burger_shop;
+// package burger_shop;
 
 public class Bread {
-    String bread = "rye";
+    private String name;
+    // String bread = "rye";
+
+    public Bread(String name) {
+        this.name = name;
+    }
+
+    public String getBread() {
+        return this.name;
+    }
 }
